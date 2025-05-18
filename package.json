@@ -1,0 +1,55 @@
+{
+  "name": "react-yr-weather-icons",
+  "version": "1.0.0",
+  "description": "A React library providing weather icons based on the Yr.no weather service",
+  "main": "dist/react-yr-weather-icons.cjs.js",
+  "module": "dist/react-yr-weather-icons.es.js",
+  "types": "dist/types/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "create-components": "npx @svgr/cli ./assets --out-dir ./src/components --no-index --typescript --title-prop --icon 2.5rem --template ./svgr-template.js",
+    "rename-components": "node ./scripts/rename-components.js",
+    "generate-stories": "node ./scripts/generate-stories.js",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "type-check": "tsc --noEmit"
+  },
+  "keywords": [
+    "react",
+    "yr",
+    "icons",
+    "weather",
+    "component-library",
+    "components"
+  ],
+  "author": "patrikhultgren",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
+  "devDependencies": {
+    "@storybook/addon-docs": "^8.6.14",
+    "@storybook/addon-essentials": "^8.6.12",
+    "@storybook/addon-interactions": "^8.6.12",
+    "@storybook/addon-onboarding": "^8.6.12",
+    "@storybook/blocks": "^8.6.14",
+    "@storybook/react": "^8.6.12",
+    "@storybook/react-vite": "^8.6.12",
+    "@storybook/test": "^8.6.12",
+    "@svgr/cli": "^8.1.0",
+    "@types/node": "^22.15.17",
+    "@vitejs/plugin-react": "^4.4.1",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "storybook": "^8.6.12",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.5",
+    "vite-plugin-dts": "^4.5.4"
+  }
+}

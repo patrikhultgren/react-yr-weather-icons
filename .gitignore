@@ -1,0 +1,12 @@
+# dependencies
+node_modules
+
+# build
+dist
+
+# misc
+.DS_Store
+
+# misc
+.DS_Store
+react-yr-weather-icons-1.0.0.tgz
