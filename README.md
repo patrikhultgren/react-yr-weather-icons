@@ -20,15 +20,15 @@ function YourApp() {
 
 Main properties
 
-| Key          | Default     | Notes                                                                    |
-| ------------ | ----------- | ------------------------------------------------------------------------ |
-| `symbolCode` | `undefined` | Use any symbol code from Yr, example: `clearsky_day` or `clearsky_night` |
-| `mode`       | `light`     | The mode of the icons, example: `light` or `dark`                        |
-| `width`      | `2.5rem`    |                                                                          |
-| `height`     | `2.5rem`    |                                                                          |
-| `className`  | `undefined` |                                                                          |
-| `title`      | `undefined` |                                                                          |
-| `titleId`    | `undefined` |                                                                          |
+| Key          | Default  | Notes                                                                    |
+| ------------ | -------- | ------------------------------------------------------------------------ |
+| `symbolCode` |          | Use any symbol code from Yr, example: `clearsky_day` or `clearsky_night` |
+| `mode`       | `light`  | The mode of the icons, example: `light` or `dark`                        |
+| `width`      | `2.5rem` |                                                                          |
+| `height`     | `2.5rem` |                                                                          |
+| `className`  |          |                                                                          |
+| `title`      |          |                                                                          |
+| `titleId`    |          |                                                                          |
 
 All standard SVG properties are also supported.
 
