@@ -8,6 +8,10 @@
   "files": [
     "dist"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:patrikhultgren/react-yr-weather-icons.git"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
