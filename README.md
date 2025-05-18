@@ -34,6 +34,7 @@ All standard SVG properties are also supported.
 
 #### Symbol codes
 
+```
 clearsky_day
 clearsky_night
 clearsky_polartwilight
@@ -117,6 +118,7 @@ snowshowers_polartwilight
 snowshowersandthunder_day
 snowshowersandthunder_night
 snowshowersandthunder_polartwilight
+```
 
 ## Licence
 
