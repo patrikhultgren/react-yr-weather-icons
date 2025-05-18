@@ -120,6 +120,8 @@ snowshowersandthunder_night
 snowshowersandthunder_polartwilight
 ```
 
+[Yr Weather Symbols](https://nrkno.github.io/yr-weather-symbols/)
+
 ## Licence
 
 MIT
