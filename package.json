@@ -27,7 +27,7 @@
     "component-library",
     "components"
   ],
-  "author": "patrikhultgren",
+  "author": "patrik.hultgren",
   "license": "MIT",
   "peerDependencies": {
     "react": ">=18.0.0",
