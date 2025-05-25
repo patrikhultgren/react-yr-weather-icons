@@ -14,8 +14,9 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "npm run test && vite build",
     "preview": "vite preview",
+    "test": "vitest run",
     "create-components": "npx @svgr/cli ./assets --out-dir ./src/components --no-index --typescript --title-prop --icon 2.5rem --template ./svgr-template.js",
     "rename-components": "node ./scripts/rename-components.js",
     "generate-stories": "node ./scripts/generate-stories.js",
@@ -47,13 +48,19 @@
     "@storybook/react-vite": "^8.6.12",
     "@storybook/test": "^8.6.12",
     "@svgr/cli": "^8.1.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.3.0",
+    "@types/jest": "^29.5.14",
+    "@types/jsdom": "^21.1.7",
     "@types/node": "^22.15.17",
     "@vitejs/plugin-react": "^4.4.1",
+    "jsdom": "^26.1.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "storybook": "^8.6.12",
     "typescript": "^5.8.3",
     "vite": "^6.3.5",
-    "vite-plugin-dts": "^4.5.4"
+    "vite-plugin-dts": "^4.5.4",
+    "vitest": "^3.1.4"
   }
 }
