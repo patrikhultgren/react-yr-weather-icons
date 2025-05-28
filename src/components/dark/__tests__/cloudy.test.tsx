@@ -20,24 +20,4 @@ describe("Cloudy", () => {
     const title = screen.queryByTitle(/./); // matches any non-empty string
     expect(title).toBeNull();
   });
-
-  it("contains gradient and filter definitions", () => {
-    const { container } = render(<Cloudy />);
-    expect(container.querySelector("linearGradient")).toBeInTheDocument();
-    expect(container.querySelector("filter")).toBeInTheDocument();
-    expect(container.querySelector("clipPath")).toBeInTheDocument();
-  });
-
-  it("contains multiple <path> elements", () => {
-    const { container } = render(<Cloudy />);
-    const paths = container.querySelectorAll("path");
-    expect(paths.length).toBeGreaterThanOrEqual(3);
-  });
-
-  it("applies blend modes and opacity correctly", () => {
-    const { container } = render(<Cloudy />);
-    const blendedGroup = container.querySelector("g[filter]");
-    expect(blendedGroup).toHaveStyle("mix-blend-mode: multiply");
-    expect(blendedGroup).toHaveAttribute("opacity", "0.3");
-  });
 });

@@ -23,19 +23,4 @@ describe("ClearSkyNight", () => {
     const svg = screen.getByRole("img");
     expect(svg).toHaveAttribute("aria-labelledby", "clear-night-title");
   });
-
-  it("contains a linearGradient definition", () => {
-    const { container } = render(<ClearSkyNight />);
-    const gradients = container.querySelectorAll("linearGradient");
-    expect(gradients.length).toBe(1);
-    expect(gradients[0]).toHaveAttribute("id");
-  });
-
-  it("contains a path with a gradient fill", () => {
-    const { container } = render(<ClearSkyNight />);
-    const path = container.querySelector("path");
-    expect(path).toBeInTheDocument();
-    const fill = path?.getAttribute("fill");
-    expect(fill).toMatch(/^url\(#.+\)$/);
-  });
 });

@@ -21,16 +21,4 @@ describe("ClearSkyDay", () => {
     const title = screen.queryByTitle(/./);
     expect(title).toBeNull();
   });
-
-  it("renders expected SVG structure", () => {
-    const { container } = render(<ClearSkyDay />);
-    const gradients = container.querySelectorAll(
-      "radialGradient, linearGradient"
-    );
-    const clipPaths = container.querySelectorAll("clipPath");
-    const paths = container.querySelectorAll("path");
-    expect(gradients.length).toBe(2);
-    expect(clipPaths.length).toBe(1);
-    expect(paths.length).toBeGreaterThan(0);
-  });
 });

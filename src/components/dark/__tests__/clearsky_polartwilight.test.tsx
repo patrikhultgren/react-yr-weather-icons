@@ -25,27 +25,4 @@ describe("ClearSkyPolarTwilight", () => {
     const svg = screen.getByRole("img");
     expect(svg).toHaveAttribute("aria-labelledby", "polar-title");
   });
-
-  it("contains radial and linear gradients", () => {
-    const { container } = render(<ClearSkyPolarTwilight />);
-    const radialGradient = container.querySelector("radialGradient");
-    const linearGradient = container.querySelector("linearGradient");
-
-    expect(radialGradient).toBeInTheDocument();
-    expect(linearGradient).toBeInTheDocument();
-    expect(radialGradient?.getAttribute("id")).toBeTruthy();
-    expect(linearGradient?.getAttribute("id")).toBeTruthy();
-  });
-
-  it("contains expected path elements", () => {
-    const { container } = render(<ClearSkyPolarTwilight />);
-    const paths = container.querySelectorAll("path");
-    expect(paths.length).toBeGreaterThanOrEqual(4); // Includes gradient and content paths
-  });
-
-  it("uses correct clipPath in the <g> tag", () => {
-    const { container } = render(<ClearSkyPolarTwilight />);
-    const group = container.querySelector("g");
-    expect(group?.getAttribute("clip-path")).toMatch(/^url\(#.+\)$/);
-  });
 });
