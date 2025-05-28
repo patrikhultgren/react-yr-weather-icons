@@ -1,45 +1,44 @@
 
-import React from "react";
 import { render, screen } from "@testing-library/react";
-import TestComponent from "../lightrainshowers_night";
+import LightRainShowersNight from "../lightrainshowers_night";
 
-describe("TestComponent", () => {
+describe("LightRainShowersNight", () => {
   it("renders without crashing", () => {
-    render(<TestComponent />);
+    render(<LightRainShowersNight />);
     const svg = screen.getByRole("img", { hidden: true });
     expect(svg).toBeInTheDocument();
   });
 
   it("renders title when provided", () => {
-    render(<TestComponent title="TestComponent title" titleId="testcomponent-title" />);
-    const title = screen.getByTitle("TestComponent title");
+    render(<LightRainShowersNight title="LightRainShowersNight title" titleId="lightrainshowersnight-title" />);
+    const title = screen.getByTitle("LightRainShowersNight title");
     expect(title).toBeInTheDocument();
     const svg = screen.getByRole("img", { hidden: true });
-    expect(svg).toHaveAttribute("aria-labelledby", "testcomponent-title");
+    expect(svg).toHaveAttribute("aria-labelledby", "lightrainshowersnight-title");
   });
 
   it("does not render title element if title prop is not provided", () => {
-    render(<TestComponent titleId="lightrainshowers_night-title" />);
+    render(<LightRainShowersNight titleId="lightrainshowers_night-title" />);
     const title = screen.queryByTitle(/./);
     expect(title).toBeNull();
   });
 
   it("accepts and applies width and height props", () => {
-    render(<TestComponent width="100px" height="150px" />);
+    render(<LightRainShowersNight width="100px" height="150px" />);
     const svg = screen.getByRole("img", { hidden: true });
     expect(svg).toHaveAttribute("width", "100px");
     expect(svg).toHaveAttribute("height", "150px");
   });
 
   it("accepts and applies className prop", () => {
-    render(<TestComponent className="my-custom-class" />);
+    render(<LightRainShowersNight className="my-custom-class" />);
     const svg = screen.getByRole("img", { hidden: true });
     expect(svg).toHaveClass("my-custom-class");
   });
 
   it("accepts and forwards other SVG props", () => {
     render(
-      <TestComponent
+      <LightRainShowersNight
         data-testid="svg-element"
         aria-label="Heavy rain icon"
         style={{ border: "1px solid red" }}

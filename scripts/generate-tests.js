@@ -9,7 +9,6 @@ const directories = [
 // Helper to create test content for a component name
 function createTestContent(componentName, symbolCode) {
   return `
-import React from "react";
 import { render, screen } from "@testing-library/react";
 import ${componentName} from "../${symbolCode}";
 
@@ -65,6 +64,31 @@ describe("${componentName}", () => {
 `;
 }
 
+// Helper to extract component name from file content
+function extractComponentName(fileContent) {
+  // Try to match `const ComponentName =` or `function ComponentName` or `export default function ComponentName`
+  const constMatch = fileContent.match(/const\s+([A-Z][A-Za-z0-9_]*)\s*=/);
+  if (constMatch) return constMatch[1];
+
+  const functionMatch = fileContent.match(
+    /function\s+([A-Z][A-Za-z0-9_]*)\s*\(/
+  );
+  if (functionMatch) return functionMatch[1];
+
+  const exportDefaultFuncMatch = fileContent.match(
+    /export\s+default\s+function\s+([A-Z][A-Za-z0-9_]*)\s*\(/
+  );
+  if (exportDefaultFuncMatch) return exportDefaultFuncMatch[1];
+
+  // Fallback: try to match export default ComponentName;
+  const exportDefaultMatch = fileContent.match(
+    /export\s+default\s+([A-Z][A-Za-z0-9_]*);?/
+  );
+  if (exportDefaultMatch) return exportDefaultMatch[1];
+
+  return null;
+}
+
 directories.forEach((dir) => {
   fs.readdir(dir, (err, files) => {
     if (err) {
@@ -82,10 +106,16 @@ directories.forEach((dir) => {
       const ext = path.extname(file);
 
       if (ext === ".tsx") {
-        const newName = `${file.replace("tsx", "test")}.tsx`;
         const symbolCode = file.replace(".tsx", "");
+        const filePath = path.join(dir, file);
 
-        const componentName = "TestComponent";
+        // Read file content synchronously (or async with callback/promises if preferred)
+        const content = fs.readFileSync(filePath, "utf-8");
+
+        const componentName = extractComponentName(content) || "TestComponent";
+
+        const newName = `${symbolCode}.test.tsx`; // Use symbolCode for test file name
+
         const testFilePath = path.join(testsDir, newName);
         const testContent = createTestContent(componentName, symbolCode);
 

@@ -1,45 +1,44 @@
 
-import React from "react";
 import { render, screen } from "@testing-library/react";
-import TestComponent from "../snowshowersandthunder_polartwilight";
+import SnowShowersAndThunderPolarTwilight from "../snowshowersandthunder_polartwilight";
 
-describe("TestComponent", () => {
+describe("SnowShowersAndThunderPolarTwilight", () => {
   it("renders without crashing", () => {
-    render(<TestComponent />);
+    render(<SnowShowersAndThunderPolarTwilight />);
     const svg = screen.getByRole("img", { hidden: true });
     expect(svg).toBeInTheDocument();
   });
 
   it("renders title when provided", () => {
-    render(<TestComponent title="TestComponent title" titleId="testcomponent-title" />);
-    const title = screen.getByTitle("TestComponent title");
+    render(<SnowShowersAndThunderPolarTwilight title="SnowShowersAndThunderPolarTwilight title" titleId="snowshowersandthunderpolartwilight-title" />);
+    const title = screen.getByTitle("SnowShowersAndThunderPolarTwilight title");
     expect(title).toBeInTheDocument();
     const svg = screen.getByRole("img", { hidden: true });
-    expect(svg).toHaveAttribute("aria-labelledby", "testcomponent-title");
+    expect(svg).toHaveAttribute("aria-labelledby", "snowshowersandthunderpolartwilight-title");
   });
 
   it("does not render title element if title prop is not provided", () => {
-    render(<TestComponent titleId="snowshowersandthunder_polartwilight-title" />);
+    render(<SnowShowersAndThunderPolarTwilight titleId="snowshowersandthunder_polartwilight-title" />);
     const title = screen.queryByTitle(/./);
     expect(title).toBeNull();
   });
 
   it("accepts and applies width and height props", () => {
-    render(<TestComponent width="100px" height="150px" />);
+    render(<SnowShowersAndThunderPolarTwilight width="100px" height="150px" />);
     const svg = screen.getByRole("img", { hidden: true });
     expect(svg).toHaveAttribute("width", "100px");
     expect(svg).toHaveAttribute("height", "150px");
   });
 
   it("accepts and applies className prop", () => {
-    render(<TestComponent className="my-custom-class" />);
+    render(<SnowShowersAndThunderPolarTwilight className="my-custom-class" />);
     const svg = screen.getByRole("img", { hidden: true });
     expect(svg).toHaveClass("my-custom-class");
   });
 
   it("accepts and forwards other SVG props", () => {
     render(
-      <TestComponent
+      <SnowShowersAndThunderPolarTwilight
         data-testid="svg-element"
         aria-label="Heavy rain icon"
         style={{ border: "1px solid red" }}
