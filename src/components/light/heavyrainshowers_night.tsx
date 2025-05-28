@@ -20,6 +20,7 @@ const HeavyRainShowersNight = ({
       height="2.5rem"
       fill="none"
       viewBox="0 0 100 100"
+      role="img"
       aria-labelledby={titleId}
       {...props}
     >
