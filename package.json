@@ -18,7 +18,7 @@
     "build": "npm run test && vite build",
     "preview": "vite preview",
     "test": "vitest run",
-    "create-components": "npx @svgr/cli ./assets --out-dir ./src/components --no-index --typescript --title-prop --icon 2.5rem --template ./svgr-template.js",
+    "create-components": "npx @svgr/cli ./assets --out-dir ./src/components --no-index --typescript --title-prop --icon 40 --template ./svgr-template.js",
     "rename-components": "node ./scripts/rename-components.js",
     "generate-tests": "node ./scripts/generate-tests.js",
     "generate-stories": "node ./scripts/generate-stories.js",

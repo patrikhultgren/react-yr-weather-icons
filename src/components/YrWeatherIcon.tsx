@@ -146,8 +146,8 @@ const getLazyIcon = ({
 
 const YrWeatherIcon = ({
   mode = "light",
-  width = "2.5rem",
-  height = "2.5rem",
+  width = 40,
+  height = 40,
   symbolCode,
   ...rest
 }: Props) => {
