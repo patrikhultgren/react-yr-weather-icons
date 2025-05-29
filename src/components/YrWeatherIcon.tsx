@@ -96,16 +96,32 @@ export type Props = {
 } & SVGProps<SVGSVGElement> &
   SVGRProps;
 
-// Preload all SVG icon components using import.meta.glob
+const Fallback = ({
+  width,
+  height,
+}: {
+  width: string | number;
+  height: string | number;
+}) => <div style={{ width, height }} role="presentation" />;
+
 const icons = {
   light: import.meta.glob("./light/*.tsx"),
   dark: import.meta.glob("./dark/*.tsx"),
 };
 
-// Cache loaded components
 const iconCache = new Map<string, React.LazyExoticComponent<any>>();
 
-const getLazyIcon = (mode: "dark" | "light", symbolCode: SymbolCode) => {
+const getLazyIcon = ({
+  mode,
+  symbolCode,
+  width,
+  height,
+}: {
+  mode: "dark" | "light";
+  symbolCode: SymbolCode;
+  width: string | number;
+  height: string | number;
+}) => {
   const key = `${mode}/${symbolCode}`;
   if (!iconCache.has(key)) {
     const importFn = icons[mode][`./${mode}/${symbolCode}.tsx`];
@@ -115,21 +131,35 @@ const getLazyIcon = (mode: "dark" | "light", symbolCode: SymbolCode) => {
       );
       iconCache.set(key, LazyIcon);
     } else {
-      // fallback component if icon doesn't exist
       iconCache.set(
         key,
-        lazy(() => Promise.resolve({ default: () => null }))
+        lazy(() =>
+          Promise.resolve({
+            default: () => <Fallback width={width} height={height} />,
+          })
+        )
       );
     }
   }
   return iconCache.get(key)!;
 };
 
-const YrWeatherIcon = ({ mode = "light", symbolCode, ...rest }: Props) => {
-  const IconComponent = getLazyIcon(mode, symbolCode);
+const YrWeatherIcon = ({
+  mode = "light",
+  width = "2.5rem",
+  height = "2.5rem",
+  symbolCode,
+  ...rest
+}: Props) => {
+  const IconComponent = getLazyIcon({
+    mode,
+    symbolCode,
+    width,
+    height,
+  });
 
   return (
-    <Suspense fallback={null}>
+    <Suspense fallback={<Fallback width={width} height={height} />}>
       <IconComponent {...rest} />
     </Suspense>
   );
