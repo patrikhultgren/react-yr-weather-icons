@@ -90,11 +90,12 @@ interface SVGRProps {
   titleId?: string;
 }
 
-export type Props = {
+type SvgIconProps = SVGProps<SVGSVGElement> & SVGRProps;
+
+export type YrWeatherIconProps = {
   mode?: "dark" | "light";
   symbolCode: SymbolCode;
-} & SVGProps<SVGSVGElement> &
-  SVGRProps;
+} & SvgIconProps;
 
 const Fallback = ({
   width,
@@ -109,7 +110,10 @@ const icons = {
   dark: import.meta.glob("./dark/*.tsx"),
 };
 
-const iconCache = new Map<string, React.LazyExoticComponent<any>>();
+const iconCache = new Map<
+  string,
+  React.LazyExoticComponent<React.ComponentType<SvgIconProps>>
+>();
 
 const getLazyIcon = ({
   mode,
@@ -121,27 +125,30 @@ const getLazyIcon = ({
   symbolCode: SymbolCode;
   width: string | number;
   height: string | number;
-}) => {
+}): React.LazyExoticComponent<React.ComponentType<SvgIconProps>> => {
   const key = `${mode}/${symbolCode}`;
   if (!iconCache.has(key)) {
     const importFn = icons[mode][`./${mode}/${symbolCode}.tsx`];
     if (importFn) {
       const LazyIcon = lazy(
-        importFn as () => Promise<{ default: React.ComponentType<any> }>
+        importFn as () => Promise<{
+          default: React.ComponentType<SvgIconProps>;
+        }>
       );
       iconCache.set(key, LazyIcon);
     } else {
+      const FallbackComponent: React.ComponentType<SvgIconProps> = () => (
+        <Fallback width={width} height={height} />
+      );
       iconCache.set(
         key,
-        lazy(() =>
-          Promise.resolve({
-            default: () => <Fallback width={width} height={height} />,
-          })
-        )
+        lazy(() => Promise.resolve({ default: FallbackComponent }))
       );
     }
   }
-  return iconCache.get(key)!;
+  return iconCache.get(key)! as React.LazyExoticComponent<
+    React.ComponentType<SvgIconProps>
+  >;
 };
 
 const YrWeatherIcon = ({
@@ -150,7 +157,7 @@ const YrWeatherIcon = ({
   height = 40,
   symbolCode,
   ...rest
-}: Props) => {
+}: YrWeatherIconProps) => {
   const IconComponent = getLazyIcon({
     mode,
     symbolCode,
@@ -160,7 +167,7 @@ const YrWeatherIcon = ({
 
   return (
     <Suspense fallback={<Fallback width={width} height={height} />}>
-      <IconComponent {...rest} />
+      <IconComponent {...rest} width={width} height={height} />
     </Suspense>
   );
 };
