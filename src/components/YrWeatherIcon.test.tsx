@@ -36,7 +36,7 @@ describe("YrWeatherIcon", () => {
   it("renders fallback for missing icon", async () => {
     render(
       // @ts-ignore - simulate missing icon
-      <YrWeatherIcon symbolCode="unknown_icon" width="3rem" height="3rem" />
+      <YrWeatherIcon symbolCode="unknown_icon" size="3rem" />
     );
 
     await waitFor(() => {
@@ -49,14 +49,7 @@ describe("YrWeatherIcon", () => {
   });
 
   it("renders fallback for missing dark mode icon", async () => {
-    render(
-      <YrWeatherIcon
-        symbolCode="clearsky_day"
-        mode="dark"
-        width="4rem"
-        height="4rem"
-      />
-    );
+    render(<YrWeatherIcon symbolCode="clearsky_day" mode="dark" size="4rem" />);
 
     await waitFor(() => {
       expect(screen.queryByTestId("ClearSkyDay")).not.toBeInTheDocument();

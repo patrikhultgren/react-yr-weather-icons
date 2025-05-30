@@ -24,13 +24,12 @@ Main properties
 | ------------ | ------- | ------------------------------------------------------------------------ |
 | `symbolCode` |         | Use any symbol code from Yr, example: `clearsky_day` or `clearsky_night` |
 | `mode`       | `light` | The mode of the icons, example: `light` or `dark`                        |
-| `width`      | 40      |                                                                          |
-| `height`     | 40      |                                                                          |
+| `size`       | 40      |                                                                          |
 | `className`  |         |                                                                          |
 | `title`      |         |                                                                          |
 | `titleId`    |         |                                                                          |
 
-All standard SVG properties are also supported.
+All standard SVG properties except width and height are also supported. Use size instead of width and height.
 
 #### Symbol codes
 

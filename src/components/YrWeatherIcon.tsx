@@ -92,18 +92,18 @@ interface SVGRProps {
 
 type SvgIconProps = SVGProps<SVGSVGElement> & SVGRProps;
 
-export type YrWeatherIconProps = {
-  mode?: "dark" | "light";
-  symbolCode: SymbolCode;
-} & SvgIconProps;
+export type YrWeatherIconProps = Omit<
+  {
+    size?: number | string;
+    mode?: "dark" | "light";
+    symbolCode: SymbolCode;
+  } & SvgIconProps,
+  "width" | "height"
+>;
 
-const Fallback = ({
-  width,
-  height,
-}: {
-  width: string | number;
-  height: string | number;
-}) => <div style={{ width, height }} role="presentation" />;
+const Fallback = ({ size }: { size: string | number }) => (
+  <div style={{ width: size, height: size }} role="presentation" />
+);
 
 const icons = {
   light: import.meta.glob("./light/*.tsx"),
@@ -118,13 +118,11 @@ const iconCache = new Map<
 const getLazyIcon = ({
   mode,
   symbolCode,
-  width,
-  height,
+  size,
 }: {
   mode: "dark" | "light";
   symbolCode: SymbolCode;
-  width: string | number;
-  height: string | number;
+  size: string | number;
 }): React.LazyExoticComponent<React.ComponentType<SvgIconProps>> => {
   const key = `${mode}/${symbolCode}`;
   if (!iconCache.has(key)) {
@@ -138,7 +136,7 @@ const getLazyIcon = ({
       iconCache.set(key, LazyIcon);
     } else {
       const FallbackComponent: React.ComponentType<SvgIconProps> = () => (
-        <Fallback width={width} height={height} />
+        <Fallback size={size} />
       );
       iconCache.set(
         key,
@@ -153,21 +151,19 @@ const getLazyIcon = ({
 
 const YrWeatherIcon = ({
   mode = "light",
-  width = 40,
-  height = 40,
+  size = 40,
   symbolCode,
   ...rest
 }: YrWeatherIconProps) => {
   const IconComponent = getLazyIcon({
     mode,
     symbolCode,
-    width,
-    height,
+    size,
   });
 
   return (
-    <Suspense fallback={<Fallback width={width} height={height} />}>
-      <IconComponent {...rest} width={width} height={height} />
+    <Suspense fallback={<Fallback size={size} />}>
+      <IconComponent {...rest} width={size} height={size} />
     </Suspense>
   );
 };
